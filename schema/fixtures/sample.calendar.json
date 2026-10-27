@@ -1,0 +1,370 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-27T12:00:00Z",
+  "frameworks": [
+    {
+      "id": "soc2",
+      "name": "SOC 2",
+      "status": "certified"
+    },
+    {
+      "id": "iso27001",
+      "name": "ISO 27001",
+      "status": "certified",
+      "note": "Annual surveillance audit"
+    },
+    {
+      "id": "hipaa",
+      "name": "HIPAA",
+      "status": "attested"
+    },
+    {
+      "id": "fedramp",
+      "name": "FedRAMP",
+      "status": "in_progress",
+      "note": "Readiness phase"
+    },
+    {
+      "id": "dora",
+      "name": "DORA",
+      "status": "regulatory"
+    }
+  ],
+  "activities": [
+    {
+      "id": "uar",
+      "name": "User Access Review",
+      "type": "review",
+      "summary": "Managers certify who has access to production systems and in-scope applications.",
+      "owner": "GRC",
+      "grc_contact": "grc@workato.com",
+      "cadence": "quarterly",
+      "anchor": "2026-02-16",
+      "duration_days": 21,
+      "drivers": [
+        "SOC 2 CC6.2",
+        "ISO 27001 A.5.18"
+      ],
+      "requirements": [
+        "Every in-scope system reviewed",
+        "Exceptions remediated within 14 days"
+      ],
+      "evidence": [
+        "Signed review export",
+        "Remediation tickets"
+      ],
+      "frameworks": [
+        "soc2",
+        "iso27001",
+        "hipaa"
+      ],
+      "team_asks": [
+        {
+          "team": "Infra",
+          "ask": "Provide privileged account list by day 3"
+        },
+        {
+          "team": "Product",
+          "ask": "Managers certify team access"
+        },
+        {
+          "team": "IT",
+          "ask": "Export SSO group membership"
+        }
+      ],
+      "source_system": "data_table",
+      "active": true
+    },
+    {
+      "id": "risk-assessment",
+      "name": "Enterprise Risk Assessment",
+      "type": "assessment",
+      "summary": "Annual review of the risk register and treatment plans.",
+      "owner": "GRC",
+      "grc_contact": "grc@workato.com",
+      "cadence": "annual",
+      "anchor": "2026-03-02",
+      "duration_days": 45,
+      "drivers": [
+        "SOC 2 CC3.2"
+      ],
+      "requirements": [
+        "Risk owners review entries"
+      ],
+      "evidence": [
+        "Updated risk register"
+      ],
+      "frameworks": [
+        "soc2",
+        "iso27001"
+      ],
+      "team_asks": [
+        {
+          "team": "Product",
+          "ask": "Confirm top product risks"
+        },
+        {
+          "team": "Infra",
+          "ask": "Confirm infrastructure risks"
+        }
+      ],
+      "source_system": "data_table",
+      "active": true
+    },
+    {
+      "id": "vendor-review",
+      "name": "Critical Vendor Review",
+      "type": "review",
+      "summary": "Re-assess critical third parties against security requirements.",
+      "owner": "GRC",
+      "grc_contact": "grc@workato.com",
+      "cadence": "semiannual",
+      "anchor": "2026-03-16",
+      "duration_days": 30,
+      "drivers": [
+        "SOC 2 CC9.2"
+      ],
+      "requirements": [],
+      "evidence": [
+        "Vendor assessments"
+      ],
+      "frameworks": [
+        "soc2",
+        "iso27001",
+        "dora"
+      ],
+      "team_asks": [
+        {
+          "team": "Procurement",
+          "ask": "Provide current vendor list"
+        },
+        {
+          "team": "Infra",
+          "ask": "Confirm vendor data flows"
+        }
+      ],
+      "source_system": "data_table",
+      "active": true
+    },
+    {
+      "id": "policy-review",
+      "name": "Policy Review & Approval",
+      "type": "approval",
+      "summary": "Annual review and CISO approval of security policies.",
+      "owner": "GRC",
+      "grc_contact": "grc@workato.com",
+      "cadence": "annual",
+      "anchor": "2026-06-01",
+      "duration_days": 30,
+      "drivers": [
+        "ISO 27001 A.5.1"
+      ],
+      "requirements": [
+        "Policy owners confirm accuracy"
+      ],
+      "evidence": [
+        "Approved policy set"
+      ],
+      "frameworks": [
+        "soc2",
+        "iso27001",
+        "hipaa"
+      ],
+      "team_asks": [
+        {
+          "team": "Legal",
+          "ask": "Review privacy-related policies"
+        },
+        {
+          "team": "Product",
+          "ask": "Confirm secure SDLC policy"
+        }
+      ],
+      "source_system": "data_table",
+      "active": true
+    },
+    {
+      "id": "bcdr-test",
+      "name": "BC/DR Test",
+      "type": "exercise",
+      "summary": "Test recovery of critical services and record results.",
+      "owner": "Infra",
+      "grc_contact": "grc@workato.com",
+      "cadence": "annual",
+      "anchor": "2026-09-07",
+      "duration_days": 14,
+      "drivers": [
+        "SOC 2 A1.3"
+      ],
+      "requirements": [],
+      "evidence": [
+        "Test report"
+      ],
+      "frameworks": [
+        "soc2",
+        "iso27001",
+        "dora"
+      ],
+      "team_asks": [
+        {
+          "team": "Infra",
+          "ask": "Run failover exercise"
+        },
+        {
+          "team": "Product",
+          "ask": "Validate application recovery"
+        }
+      ],
+      "source_system": "data_table",
+      "active": true
+    },
+    {
+      "id": "soc2-audit",
+      "name": "SOC 2 Audit Fieldwork",
+      "type": "audit",
+      "summary": "External auditor fieldwork and evidence requests.",
+      "owner": "GRC",
+      "grc_contact": "grc@workato.com",
+      "cadence": "annual",
+      "anchor": "2026-10-05",
+      "duration_days": 42,
+      "drivers": [
+        "SOC 2"
+      ],
+      "requirements": [],
+      "evidence": [
+        "Auditor evidence package"
+      ],
+      "frameworks": [
+        "soc2"
+      ],
+      "team_asks": [
+        {
+          "team": "Infra",
+          "ask": "Respond to evidence requests within 3 days"
+        },
+        {
+          "team": "Product",
+          "ask": "Respond to evidence requests within 3 days"
+        },
+        {
+          "team": "IT",
+          "ask": "Provide change-management samples"
+        }
+      ],
+      "source_system": "data_table",
+      "active": true
+    },
+    {
+      "id": "pen-test",
+      "name": "External Penetration Test",
+      "type": "assessment",
+      "summary": "Annual third-party penetration test of the platform.",
+      "owner": "Security",
+      "grc_contact": "grc@workato.com",
+      "cadence": "annual",
+      "anchor": null,
+      "duration_days": 30,
+      "drivers": [
+        "SOC 2 CC4.1"
+      ],
+      "requirements": [],
+      "evidence": [],
+      "frameworks": [
+        "soc2",
+        "fedramp"
+      ],
+      "team_asks": [
+        {
+          "team": "Infra",
+          "ask": "Provide test scope and environment"
+        }
+      ],
+      "source_system": "sql",
+      "active": true
+    },
+    {
+      "id": "security-training",
+      "name": "Security Awareness Training",
+      "type": "training",
+      "summary": "Annual security training for all employees.",
+      "owner": "People",
+      "grc_contact": "grc@workato.com",
+      "cadence": "annual",
+      "anchor": "2026-11-02",
+      "duration_days": 30,
+      "drivers": [
+        "ISO 27001 A.6.3"
+      ],
+      "requirements": [],
+      "evidence": [
+        "Completion report"
+      ],
+      "frameworks": [
+        "soc2",
+        "iso27001",
+        "hipaa"
+      ],
+      "team_asks": [
+        {
+          "team": "People",
+          "ask": "Assign training and track completion"
+        }
+      ],
+      "source_system": "data_table",
+      "active": true
+    }
+  ],
+  "windows": [
+    {
+      "window_id": "uar-FY2026-Q1",
+      "start": "2026-02-16",
+      "end": "2026-03-09",
+      "basis": "confirmed",
+      "status": "done",
+      "jira_key": "GRC-101"
+    },
+    {
+      "window_id": "uar-FY2026-Q2",
+      "start": "2026-05-18",
+      "end": "2026-06-08",
+      "basis": "confirmed",
+      "status": "done",
+      "jira_key": "GRC-142"
+    },
+    {
+      "window_id": "uar-FY2026-Q3",
+      "start": "2026-08-17",
+      "end": "2026-09-07",
+      "basis": "confirmed",
+      "status": "done",
+      "jira_key": "GRC-188"
+    },
+    {
+      "window_id": "uar-FY2026-Q4",
+      "start": "2026-11-16",
+      "end": "2026-12-07",
+      "basis": "confirmed",
+      "jira_status": "planned",
+      "jira_key": "GRC-230"
+    },
+    {
+      "window_id": "soc2-audit-FY2026-A",
+      "basis": "confirmed",
+      "jira_status": "in_progress",
+      "jira_key": "GRC-210",
+      "notes": "Fieldwork kickoff held 5 Oct"
+    },
+    {
+      "window_id": "bcdr-test-FY2026-A",
+      "basis": "confirmed",
+      "status": "done",
+      "notes": "Completed; report filed"
+    },
+    {
+      "window_id": "risk-assessment-FY2026-A",
+      "basis": "confirmed",
+      "status": "done"
+    }
+  ]
+}

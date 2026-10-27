@@ -32,3 +32,10 @@ export function addMonths(date: ISODate, n: number): ISODate {
   const tm = (idx % 12) + 1;
   return toISO(ty, tm, Math.min(d, daysInMonth(ty, tm)));
 }
+
+/** Whole days from a to b (b - a). */
+export function diffDays(a: ISODate, b: ISODate): number {
+  const pa = parseISO(a);
+  const pb = parseISO(b);
+  return Math.round((Date.UTC(pb.y, pb.m - 1, pb.d) - Date.UTC(pa.y, pa.m - 1, pa.d)) / 86_400_000);
+}
