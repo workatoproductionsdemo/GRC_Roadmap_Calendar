@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-27T12:00:00Z",
+  "frameworks": [],
+  "activities": [],
+  "windows": [{ "window_id": "uar-FY2026-Q2", "findings": ["gap in CC6.2"] }]
+}

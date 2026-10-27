@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grc-roadmap-calendar/schema/calendar.schema.json",
+  "title": "GRC Roadmap Calendar data (calendar.json)",
+  "description": "The only contract between the Workato publisher and the web app. No fields for audit findings or control gaps.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_at", "frameworks", "activities", "windows"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "frameworks": { "type": "array", "items": { "$ref": "#/$defs/framework" } },
+    "activities": { "type": "array", "items": { "$ref": "#/$defs/activity" } },
+    "windows": {
+      "description": "Per-window overrides and status. Windows are otherwise expanded from activity cadence.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/window" }
+    }
+  },
+  "$defs": {
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "framework": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "status"],
+      "properties": {
+        "id": { "$ref": "#/$defs/slug" },
+        "name": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["certified", "attested", "in_progress", "not_started", "regulatory"] },
+        "note": { "type": "string" }
+      }
+    },
+    "activity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "name", "type", "summary", "owner", "grc_contact", "cadence", "anchor",
+        "duration_days", "drivers", "requirements", "evidence", "frameworks", "team_asks",
+        "source_system", "active"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/slug" },
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string" },
+        "owner": { "type": "string" },
+        "grc_contact": { "type": "string" },
+        "cadence": { "enum": ["annual", "semiannual", "quarterly", "monthly", "once"] },
+        "anchor": {
+          "description": "First occurrence. null means dates TBC.",
+          "oneOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }]
+        },
+        "duration_days": { "type": "integer", "minimum": 1 },
+        "drivers": { "type": "array", "items": { "type": "string" } },
+        "requirements": { "type": "array", "items": { "type": "string" } },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "frameworks": { "type": "array", "items": { "$ref": "#/$defs/slug" } },
+        "team_asks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["team", "ask"],
+            "properties": {
+              "team": { "type": "string", "minLength": 1 },
+              "ask": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "source_system": { "enum": ["data_table", "sql"] },
+        "active": { "type": "boolean" }
+      }
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["window_id"],
+      "properties": {
+        "window_id": { "type": "string", "pattern": "^[a-z0-9-]+-FY\\d{4}-(Q[1-4]|H[12]|A|M(0[1-9]|1[0-2])|ONCE)$" },
+        "start": { "$ref": "#/$defs/date" },
+        "end": { "$ref": "#/$defs/date" },
+        "basis": { "enum": ["confirmed", "indicative"] },
+        "status": { "enum": ["planned", "in_progress", "done"] },
+        "jira_status": { "enum": ["planned", "in_progress", "done"] },
+        "jira_key": { "type": "string", "pattern": "^[A-Z][A-Z0-9]+-\\d+$" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
